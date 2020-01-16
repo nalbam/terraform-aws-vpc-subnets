@@ -14,14 +14,17 @@ resource "aws_subnet" "public" {
       Name = format("%s-%s", var.name, var.public_subnets[count.index].suffix)
     },
     var.tags,
-    zipmap(var.public_subnets[count.index].tags),
+    # zipmap(var.public_subnets[count.index].tags),
   )
 }
 
 resource "aws_route_table_association" "public" {
   count = length(var.public_subnets)
 
-  route_table_id = aws_route_table.public[0].id
+  route_table_id = element(
+    aws_route_table.public.*.id,
+    var.single_route_table ? 0 : local.zone_index[element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)]
+  )
 
   subnet_id = aws_subnet.public[count.index].id
 }

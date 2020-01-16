@@ -12,6 +12,25 @@ variable "name" {
 
 variable "vpc_id" {
   description = "The VPC ID."
+  type        = string
+  # default     = ""
+}
+
+variable "single_route_table" {
+  description = "Should be true if you want to provision a single shared Route Table across all of your public networks"
+  type        = bool
+  default     = false
+}
+
+variable "enable_nat_gateway" {
+  description = "Should be true if you want to provision NAT Gateways for each of your private networks"
+  type        = bool
+  default     = false
+}
+
+variable "nat_gateway_ids" {
+  type    = list(string)
+  default = []
 }
 
 variable "public_subnets" {
@@ -31,17 +50,6 @@ variable "private_subnets" {
     cidr   = string
     tags   = list(string)
   }))
-  default = []
-}
-
-variable "enable_nat_gateway" {
-  description = "Should be true if you want to provision NAT Gateways for each of your private networks"
-  type        = bool
-  default     = false
-}
-
-variable "nat_gateway_ids" {
-  type    = list(string)
   default = []
 }
 

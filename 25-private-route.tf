@@ -16,7 +16,7 @@ resource "aws_route_table" "private" {
       Name = format("%s-%s", var.name, var.private_subnets[count.index].suffix)
     },
     var.tags,
-    zipmap(var.private_subnets[count.index].tags),
+    # zipmap(var.private_subnets[count.index].tags),
   )
 }
 

@@ -32,11 +32,13 @@ module "subnets" {
 
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
-  public_subnets  = var.public_subnets
-  private_subnets = var.private_subnets
+  single_route_table = var.single_route_table
 
   enable_nat_gateway = var.enable_nat_gateway
   nat_gateway_ids    = data.terraform_remote_state.vpc.outputs.nat_gateway_ids
+
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
 
   tags = var.tags
 }

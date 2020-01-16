@@ -12,6 +12,14 @@ variable "vpc_id" {
   default = ""
 }
 
+variable "single_route_table" {
+  default = false
+}
+
+variable "enable_nat_gateway" {
+  default = true
+}
+
 variable "public_subnets" {
   default = [
     {
@@ -68,10 +76,6 @@ variable "private_subnets" {
       ]
     },
   ]
-}
-
-variable "enable_nat_gateway" {
-  default = true
 }
 
 variable "tags" {
