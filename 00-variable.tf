@@ -28,6 +28,18 @@ variable "enable_nat_gateway" {
   default     = false
 }
 
+variable "create_nat_gateway" {
+  description = "Should be true if you want to provision NAT Gateways for each of your private networks"
+  type        = bool
+  default     = false
+}
+
+variable "single_nat_gateway" {
+  description = "Should be true if you want to provision a single shared NAT Gateway across all of your private networks"
+  type        = bool
+  default     = false
+}
+
 variable "nat_gateway_ids" {
   type    = list(string)
   default = []

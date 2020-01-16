@@ -13,10 +13,13 @@ resource "aws_route_table" "private" {
 
   tags = merge(
     {
-      Name = format("%s-%s", var.name, var.private_subnets[count.index].suffix)
+      Name = format(
+        "%s-private-%s",
+        var.name,
+        element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)
+      )
     },
     var.tags,
-    # zipmap(var.private_subnets[count.index].tags),
   )
 }
 
@@ -25,7 +28,7 @@ resource "aws_route" "private" {
 
   route_table_id         = element(aws_route_table.private.*.id, count.index)
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = element(var.nat_gateway_ids, count.index)
+  nat_gateway_id         = element(local.nat_gateway_ids, count.index)
 
   timeouts {
     create = "5m"
