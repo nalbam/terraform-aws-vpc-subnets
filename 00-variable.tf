@@ -46,22 +46,22 @@ variable "nat_gateway_ids" {
 }
 
 variable "public_subnets" {
-  type = list(object({
-    suffix = string
-    zone   = string
-    cidr   = string
-    tags   = list(string)
-  }))
+  # type = list(object({
+  #   suffix = string
+  #   zone   = string
+  #   cidr   = string
+  #   tags   = map
+  # }))
   default = []
 }
 
 variable "private_subnets" {
-  type = list(object({
-    suffix = string
-    zone   = string
-    cidr   = string
-    tags   = list(string)
-  }))
+  # type = list(object({
+  #   suffix = string
+  #   zone   = string
+  #   cidr   = string
+  #   tags   = map
+  # }))
   default = []
 }
 

@@ -13,8 +13,8 @@ resource "aws_subnet" "public" {
     {
       Name = format("%s-%s", var.name, var.public_subnets[count.index].suffix)
     },
+    var.public_subnets[count.index].tags,
     var.tags,
-    # zipmap(var.public_subnets[count.index].tags),
   )
 }
 
